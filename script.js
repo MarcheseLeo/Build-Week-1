@@ -9,7 +9,7 @@
           "Central Process Unit",
           "Computer Personal Unit",
           "Central Processor Unit",
-        ],
+        ],     
       },
       {
         category: "Science: Computers",
