@@ -109,37 +109,7 @@
 
 
   
-  //✅ 1. HTML (timer + basic quiz layout)
 
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Quiz with Per-Question Timer</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body>
-
-  <!-- TIMER (top-right) -->
-  <div id="question-timer">Time left: 20s</div>
-
-  <!-- QUIZ AREA -->
-  <div id="quiz-container">
-    <h2 id="question-text"></h2>
-    <div id="answers"></div>
-
-    <button id="proceedBtn">Proceed</button>
-  </div>
-
-  <script src="script.js"></script>
-</body>
-</html>
-
-
-body {
-  font-family: Arial, sans-serif;
-  padding: 40px;
-}
 
 /* TIMER BOX */
 #question-timer {
