@@ -132,33 +132,7 @@
 
 
 
-//✅ 2. CSS (top-right timer + warning colors)
-
-/* WARNING (low time) */
-#question-timer.warning {
-  background: #ff9800; /* orange */
-}
-
-/* CRITICAL (very low time) */
-#question-timer.critical {
-  background: #f44336; /* red */
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
-  100% { transform: scale(1); }
-}
-
-#quiz-container {
-  max-width: 600px;
-}
-
-
-
-
-//✅ 3. JavaScript (per-question timer logic)
+// 3. JavaScript (per-question timer logic)
 
 // --------------------
 // QUESTIONS (yours)
@@ -273,25 +247,6 @@ function goToNextQuestion() {
     endQuiz();
   }
 }
-
-// --------------------
-// PROCEED BUTTON
-// --------------------
-document.getElementById("proceedBtn").addEventListener("click", () => {
-  goToNextQuestion();
-});
-
-// --------------------
-// END QUIZ
-// --------------------
-function endQuiz() {
-  alert("Quiz finished!");
-}
-
-// --------------------
-// START QUIZ
-// --------------------
-loadQuestion();
 
 
 /*
