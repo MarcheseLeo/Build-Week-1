@@ -1,21 +1,44 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/style.css">
     <title>Document</title>
-    <!--=============== Link css ===============-->
-    <link rel="stylesheet" href="assets/css/style.css">
 </head>
+
 <body>
-    
-    <!-- TODO: 1. Struttura base -->
+    <header>
+        <div id="logoHeader">
+            <img src="./assets/images/epicode_logo.png" alt="Logo Epicode">
+        </div>
+    </header>
+    <main>
+        <section id="boxQuestions">
+            <div class="titleContainer">
+                <h2 class="titleQuestion">How can I create a <span class="boldText">checkbox in HTML?</span></h2>
+            </div>
+            <div class="answersGroup">
+                <form action="answersForm">
+                    <input type="radio" name="answer" id="radio1">
+                    <label for="radio1" class="styleButton">Risposta numero 1</label>
 
-    <!-- TODO: 2. Creazione Quiz page -->
+                    <input type="radio" name="answer" id="radio2">
+                    <label for="radio2" class="styleButton">Risposta numero 2</label>
 
-    <!-- TODO: 3.Creazione container domande -->
+                    <input type="radio" name="answer" id="radio3">
+                    <label for="radio3" class="styleButton">Risposta numero 3</label>
 
-    <!--=============== Link script ===============-->
-    <script src="assets/js/script.js"></script>
+                    <input type="radio" name="answer" id="radio4">
+                    <label for="radio4" class="styleButton">Risposta numero 4</label>
+                </form>
+            </div>
+        </section>
+        <section id="counterQuestions">
+            <p class="count">QUESTION <span class="increasingNumber">1</span> / <span class="allQuestions">10</span></p>
+        </section>
+    </main>
 </body>
+
 </html>
