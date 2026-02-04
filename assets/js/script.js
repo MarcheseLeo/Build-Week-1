@@ -98,4 +98,3 @@
       },
     ];
     
-/* TODO: Memorizzazione risposte*////
