@@ -7,8 +7,6 @@ let questionCounter = 0
 let score = 0
 let currentQuestion = {}
 const questionsLength = questions.length
-// let resultContainer = document.getElementById('resultContainer')
-// let scoreText = document.getElementById('score-text');
 let counterText = document.querySelector('.count')
 
 
@@ -23,7 +21,7 @@ function renderQuestion() {
 
     //Randomizzazione della domanda corrente
     currentQuestion = getRandomQuestion()
-    // console.log("Domande rimaste:", questions.length)
+
     
     //Creazione dell/array per le risposte
     let options = []
@@ -59,8 +57,7 @@ function renderQuestion() {
     answersGroup.appendChild(form)
 
     randomOptions.forEach((option, index) => {
-        // const wrapper = document.createElement('div')
-        // wrapper.classList.add('wrapper')
+
 
         //Creazione dell'input radio
         const radio = document.createElement('input')
@@ -85,11 +82,10 @@ function renderQuestion() {
             boxContainer.innerHTML = ""
             setTimeout(nextQuestion, 100);
         })
-        // wrapper.appendChild(radio)
-        // wrapper.appendChild(label)
+      
         form.appendChild(radio)
         form.appendChild(label)
-        // boxContainer.appendChild(wrapper);
+
     })
 }
 
@@ -108,9 +104,7 @@ function nextQuestion() {
 }
 
 function showResult() {
-    // boxContainer.style.display = "none"; 
-    // resultContainer.style.display = "block"; 
-    // scoreText.innerText = `Hai risposto correttamente a ${score} su ${questionsLength} domande!`;
+
 }
 function randomizeAnswers(options) {
     let arr = []
