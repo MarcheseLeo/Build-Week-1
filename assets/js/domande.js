@@ -126,4 +126,3 @@ window.addEventListener('load', () => {
     renderQuestion()
 })
 
-//prova
