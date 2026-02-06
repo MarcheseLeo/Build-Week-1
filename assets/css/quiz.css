@@ -17,22 +17,11 @@ body {
   font-family: "Outfit";
 }
 
-main {
+header {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-header,
-main {
-  display: flex;
-  margin: 3rem 7rem;
-}
-
-#boxQuestions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  margin-top: 3rem;
+  margin-left: 7rem;
+  margin-right: 7rem;
 }
 
 #logoHeader img {
@@ -41,8 +30,25 @@ main {
   height: auto;
 }
 
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.5rem 7rem;
+}
+
+/*CODICE RELATIVO AL BOX CONTENENTE DOMANDA E RISPOSTE*/
+
+#boxQuestions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/*CODICE RELATIVO AL TITOLO OVVERO LA DOMANDA*/
+
 .titleContainer {
-  width: 50%;
+  min-width: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -65,15 +71,17 @@ h2 {
   width: 70%;
 }
 
+/*CODICE RELATIVO AL GRUPPO DI RISPOSTE*/
+
 .answersGroup {
-  margin-top: 7em;
+  margin-top: 3em;
   display: flex;
   justify-content: center;
-  width: 100%;
 }
 
 .answersGroup form {
-  width: 50%;
+  min-width: 10px;
+  width: 100%;
   height: auto;
   display: flex;
   justify-content: center;
@@ -92,7 +100,7 @@ h2 {
   padding: 2em 7em;
   text-align: center;
   width: 20%;
-  background-color: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.1);
   border-radius: 10em;
   border: 1px solid;
   border-color: #ffffff;
@@ -100,14 +108,16 @@ h2 {
 
 .styleButton:hover {
   cursor: pointer;
-  transition: background-color 0.1s ease-in;
-  background-color: #d20094;
-  background-color: linear-gradient(
+  transition: background 0.1s ease-in;
+  background: #d20094;
+  background: linear-gradient(
     180deg,
     rgba(210, 0, 148, 1) 0%,
     rgba(144, 0, 128, 1) 100%
   );
 }
+
+/*CODICE RELATIVO AL COUNTER DELLE RISPOSTE*/
 
 #counterQuestions {
   display: flex;
@@ -124,41 +134,5 @@ h2 {
 
 .allQuestions {
   color: #d20094;
-}
-
-
-// ------------CSS TIMER------------
-
-
-/* TIMER BOX */
-#question-timer {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: #222;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 8px;
-  font-size: 18px;
-  font-weight: bold;
-  z-index: 1000;
-  transition: background 0.3s ease, transform 0.3s ease;
-}
-
-/* ORANGE = WARNING */
-#question-timer.warning {
-  background: #ff9800;
-}
-
-/* RED + PULSE = CRITICAL */
-#question-timer.critical {
-  background: #e53935;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
-  100% { transform: scale(1); }
 }
 
