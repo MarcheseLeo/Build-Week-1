@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="./assets/css/quiz.css">
+    <link rel="stylesheet" href="./assets/css/timer.css">
     <title>Document</title>
 </head>
 
@@ -39,7 +40,24 @@
             <p class="count">QUESTION <span class="increasingNumber">1</span> / <span class="allQuestions">10</span></p>
         </section>
 
-        
+        <!-- ================= TIMER (QUIZ PAGE ONLY) ================= -->
+        <div id="quiz-timer" class="quiz-timer">
+            <svg class="quiz-timer-svg" width="140" height="140">
+                <!-- Background ring (transparent look) -->
+                <circle class="quiz-timer-bg" cx="70" cy="70" r="60" />
+
+                <!-- Progress ring -->
+                <circle class="quiz-timer-progress" cx="70" cy="70" r="60" />
+            </svg>
+
+            <!-- CENTERED TEXT (INSIDE TIMER) -->
+            <div class="quiz-timer-text">
+                <div class="quiz-timer-top">SECONDS</div>
+                <div id="quiz-timer-number" class="quiz-timer-number">30</div>
+                <div class="quiz-timer-bottom">REMAINING</div>
+            </div>
+        </div>
+
     </main>
 
 
