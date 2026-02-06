@@ -136,3 +136,45 @@ h2 {
   color: #d20094;
 }
 
+/*css per End Quiz - aggancio a -page */
+
+#endQuizparagraph {
+  margin: revert;
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 60px;
+  color: white;
+  text-align: center;
+}
+
+#endButton{
+  text-align: center;
+  height: 100%;
+  font-size: 1.3em;
+  color: black;
+  font-weight: 700;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: rgba(202, 202, 202, 0.315);
+  box-shadow: 0px 0px 30px transparent;
+  border: #00ffff;
+  transition: all 1s ease
+}
+
+#endButton:hover{
+  text-align: center;
+  height: 100%;
+  font-size: 1.3em;
+  color: black;
+  font-weight: 700;
+  padding-left: 50px;
+  padding-right: 50px;
+  background-color: #00ffff;
+  box-shadow: 0px 0px 30px transparent;
+  border: #00ffff;
+}
+
+
+/*----------------------------------*/
