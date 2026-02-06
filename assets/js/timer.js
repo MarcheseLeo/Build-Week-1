@@ -1,42 +1,41 @@
-//----------- BRANCH JS/TIMER ---------------
+// ================= TIMER STATE =================
 
-/* TODO: Timer a domanda*/
-
-
-
-
-// -------------------------------------------
-
-
-
-// --------------------
-// TIMER STATE
-// --------------------
 let timerInterval = null;
 let timeLeft = 0;
-let totalTimeForQuestion = 0;
+let totalTime = 0;
 
-// --------------------
-// TIME BY DIFFICULTY
-// --------------------
-function getTimeForQuestion(difficulty) {
-  switch (difficulty) {
-    case "easy": return 20;
-    case "medium": return 40;
-    case "hard": return 60;
-    default: return 30;
-  }
+const FULL_DASH = 376.99; // 2 * PI * 60
+
+// ================= DIFFICULTY MAP =================
+
+function getTimeForQuestion(difficulty = "easy") {
+  const times = {
+    easy: 30,
+    medium: 40,
+    hard: 60
+  };
+  return times[difficulty] || 30;
 }
 
-// --------------------
-// START TIMER (CALL THIS PER QUESTION)
-// --------------------
-function startQuestionTimer(difficulty, onTimeUp) {
+// ================= START TIMER =================
+
+function startQuestionTimer(difficulty = "easy", onTimeUp) {
   clearInterval(timerInterval);
 
-  const seconds = getTimeForQuestion(difficulty);
-  timeLeft = seconds;
-  totalTimeForQuestion = seconds;
+  const container = document.getElementById("quiz-timer");
+  const svg = document.querySelector(".quiz-timer-svg");
+  if (!container || !svg) return; // Not on quiz page
+
+  totalTime = getTimeForQuestion(difficulty);
+  timeLeft = totalTime;
+
+  // RESET ROTATION
+  container.classList.remove("quiz-timer-rotating");
+  void svg.offsetWidth; // force reflow
+  container.classList.add("quiz-timer-rotating");
+
+  // Sync rotation duration
+  svg.style.animationDuration = `${totalTime}s`;
 
   updateTimerUI();
 
@@ -46,34 +45,40 @@ function startQuestionTimer(difficulty, onTimeUp) {
 
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
-      if (typeof onTimeUp === "function") {
-        onTimeUp(); // vai alla prossima domanda
-      }
+      onTimeUp && onTimeUp();
     }
   }, 1000);
 }
 
-// --------------------
-// UPDATE TIMER UI
-// --------------------
+// ================= UPDATE UI =================
+
 function updateTimerUI() {
-  const timerEl = document.getElementById("question-timer");
-  timerEl.textContent = `Time left: ${timeLeft}s`;
+  const container = document.getElementById("quiz-timer");
+  const numberEl = document.getElementById("quiz-timer-number");
+  const progressEl = document.querySelector(".quiz-timer-progress");
 
-  timerEl.classList.remove("warning", "critical");
+  if (!container || !numberEl || !progressEl) return;
 
-  const percentLeft = timeLeft / totalTimeForQuestion;
+  numberEl.textContent = timeLeft;
 
-  if (percentLeft <= 0.2) {
-    timerEl.classList.add("critical");
-  } else if (percentLeft <= 0.4) {
-    timerEl.classList.add("warning");
-  }
+  const percent = timeLeft / totalTime;
+  const offset = FULL_DASH * (1 - percent);
+  progressEl.style.strokeDashoffset = offset;
+
+  container.classList.remove("warning", "critical");
+
+  if (percent <= 0.2) container.classList.add("critical");
+  else if (percent <= 0.4) container.classList.add("warning");
 }
 
-// --------------------
-// STOP TIMER (OPTIONAL)
-// --------------------
+// ================= OPTIONAL =================
+
 function stopQuestionTimer() {
   clearInterval(timerInterval);
 }
+
+
+// ================= RICHIAMO PER AUTO-RESET =================
+
+
+startQuestionTimer("easy", goToNextQuestion);
