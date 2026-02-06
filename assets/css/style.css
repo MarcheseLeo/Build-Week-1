@@ -1,164 +1,106 @@
-@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Outfit:wght@100..900&display=swap");
+/* ================= TIMER WRAPPER ================= */
 
-::selection {
-  color: white;
-  background-color: #d20094;
-}
-
-* {
-  margin: 0;
-  padding: 0;
-}
-
-body {
-  background-image: url(../images/bg.jpg);
-  background-size: cover;
-  color: white;
-  font-family: "Outfit";
-}
-
-main {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-
-header,
-main {
-  display: flex;
-  margin: 3rem 7rem;
-}
-
-#boxQuestions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-#logoHeader img {
-  margin: 0;
-  width: 10%;
-  height: auto;
-}
-
-.titleContainer {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.titleQuestion {
-  font-family: "Outfit";
-  font-weight: 300;
-}
-
-.boldText {
-  font-family: "Outfit";
-  font-weight: 500;
-}
-
-h2 {
-  margin-top: 1em;
-  text-align: center;
-  font-size: 4em;
-  width: 70%;
-}
-
-.answersGroup {
-  margin-top: 7em;
-  display: flex;
-  justify-content: center;
-  width: 100%;
-}
-
-.answersGroup form {
-  width: 50%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  gap: 2em 4em;
-  flex-wrap: wrap;
-}
-
-.answersGroup input[type="radio"] {
-  position: absolute;
-  opacity: 0;
-}
-
-.styleButton {
-  position: relative;
-  font-family: "Inter";
-  padding: 2em 7em;
-  text-align: center;
-  width: 20%;
-  background-color: rgba(255, 255, 255, 0.1);
-  border-radius: 10em;
-  border: 1px solid;
-  border-color: #ffffff;
-}
-
-.styleButton:hover {
-  cursor: pointer;
-  transition: background-color 0.1s ease-in;
-  background-color: #d20094;
-  background-color: linear-gradient(
-    180deg,
-    rgba(210, 0, 148, 1) 0%,
-    rgba(144, 0, 128, 1) 100%
-  );
-}
-
-#counterQuestions {
-  display: flex;
-  justify-content: center;
-}
-
-.count {
-  position: absolute;
-  bottom: 3em;
-  letter-spacing: 0.3em;
-  font-size: 1.2em;
-  font-weight: 500;
-}
-
-.allQuestions {
-  color: #d20094;
-}
-
-
-// ------------CSS TIMER------------
-
-
-/* TIMER BOX */
-#question-timer {
+.quiz-timer {
   position: fixed;
   top: 20px;
   right: 20px;
-  background: #222;
-  color: #fff;
-  padding: 12px 18px;
-  border-radius: 8px;
-  font-size: 18px;
+  width: 140px;
+  height: 140px;
+  z-index: 9999;
+}
+
+/* SVG (rotated so it starts from top) */
+.quiz-timer-svg {
+  width: 140px;
+  height: 140px;
+  transform: rotate(-90deg);
+}
+
+/* BACKGROUND RING (transparent) */
+.quiz-timer-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 10;
+}
+
+/* PROGRESS RING */
+.quiz-timer-progress {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 17;
+  stroke-linecap: round;
+  stroke-dasharray: 376.99; /* 2 * PI * 60 */
+  stroke-dashoffset: 0;
+  transition: stroke 0.3s ease;
+}
+
+/* CENTER TEXT OVERLAY */
+.quiz-timer-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 140px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* LABELS */
+.quiz-timer-top,
+.quiz-timer-bottom {
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+/* NUMBER */
+.quiz-timer-number {
+  font-size: 40px;
   font-weight: bold;
-  z-index: 1000;
-  transition: background 0.3s ease, transform 0.3s ease;
+  line-height: 1;
+  margin: 2px 0;
 }
 
-/* ORANGE = WARNING */
-#question-timer.warning {
-  background: #ff9800;
+/* ================= WARNING STATES ================= */
+
+.quiz-timer.warning .quiz-timer-progress {
+  stroke: orange;
 }
 
-/* RED + PULSE = CRITICAL */
-#question-timer.critical {
-  background: #e53935;
+.quiz-timer.critical .quiz-timer-progress {
+  stroke: red;
   animation: pulse 1s infinite;
 }
 
+/* ================= ROTATION ================= */
+
+@keyframes timer-rotate {
+  from {
+    transform: rotate(-90deg) rotate(0deg);
+  }
+  to {
+    transform: rotate(-90deg) rotate(360deg);
+  }
+}
+
+.quiz-timer-rotating .quiz-timer-svg {
+  animation: timer-rotate linear forwards;
+}
+
+/* ================= PULSE ================= */
+
 @keyframes pulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.05); }
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
   100% { transform: scale(1); }
 }
+
 
