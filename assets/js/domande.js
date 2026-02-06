@@ -13,7 +13,7 @@ let counterText = document.querySelector('.count')
 function renderQuestion() {
     //Verifica della domanda corrente
     if (questionCounter >= questionsLength) {
-        showResult()
+        endQuiz()
         return;
     }
     //Aggiotnamento indicatore Domanda corrente
@@ -103,9 +103,55 @@ function nextQuestion() {
     renderQuestion();
 }
 
-function showResult() {
+///MODIFICA PER COLLEGARE A PAGINA FINALE
+
+function endQuiz() {
+    console.log(score)
+
+    //Elimino il contatore delle domande
+
+    let countQ=document.querySelector("#counterQuestions")
+    let mainCont=document.querySelector("main")
+    mainCont.removeChild(countQ)
+
+    //sistemo il main
+
+    mainCont.style.display="flex"
+    mainCont.style.flexDirection="column"
+    mainCont.style.alignItems="center"
+    mainCont.style.justifyContent="spece-evenly"
+
+    //faccio apparire il paragraph di fine quiz
+
+    endQuizPar=document.createElement("p")
+
+    endQuizPar.innerHTML="Il quiz è terminato"
+    endQuizPar.id="endQuizparagraph"
+
+    mainCont.appendChild(endQuizPar)
+
+    //appendo un Button già attivo che rimanda alla result-page
+
+    endQuizBtnLink=document.createElement("a")
+    endQuizBtnLink.href="result.html"
+    
+    endQuizBtn=document.createElement("button")
+    endQuizBtn.id="endButton"
+    endQuizBtn.innerHTML="SHOW RESULT"
+    endQuizBtn.addEventListener("onclick", ()=>{showResult(score,questionsLength)})
+
+    mainCont.appendChild(endQuizBtnLink)
+    endQuizBtnLink.appendChild(endQuizBtn)
+    
+    
 
 }
+
+
+
+
+
+
 function randomizeAnswers(options) {
     let arr = []
     let copy = []
