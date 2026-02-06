@@ -125,3 +125,4 @@ function randomizeAnswers(options) {
 window.addEventListener('load', () => {
     renderQuestion()
 })
+//
