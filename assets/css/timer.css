@@ -1,0 +1,104 @@
+/* ================= TIMER WRAPPER ================= */
+
+.quiz-timer {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 140px;
+  height: 140px;
+  z-index: 9999;
+}
+
+/* SVG (rotated so it starts from top) */
+.quiz-timer-svg {
+  width: 140px;
+  height: 140px;
+  transform: rotate(-90deg);
+}
+
+/* BACKGROUND RING (transparent) */
+.quiz-timer-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.15);
+  stroke-width: 10;
+}
+
+/* PROGRESS RING */
+.quiz-timer-progress {
+  fill: none;
+  stroke: #00ffff;
+  stroke-width: 17;
+  stroke-linecap: round;
+  stroke-dasharray: 376.99; /* 2 * PI * 60 */
+  stroke-dashoffset: 0;
+  transition: stroke 0.3s ease;
+}
+
+/* CENTER TEXT OVERLAY */
+.quiz-timer-text {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 140px;
+  height: 140px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* LABELS */
+.quiz-timer-top,
+.quiz-timer-bottom {
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+
+/* NUMBER */
+.quiz-timer-number {
+  font-size: 40px;
+  font-weight: bold;
+  line-height: 1;
+  margin: 2px 0;
+}
+
+/* ================= WARNING STATES ================= */
+
+.quiz-timer.warning .quiz-timer-progress {
+  stroke: orange;
+}
+
+.quiz-timer.critical .quiz-timer-progress {
+  stroke: red;
+  animation: pulse 1s infinite;
+}
+
+/* ================= ROTATION ================= */
+
+@keyframes timer-rotate {
+  from {
+    transform: rotate(-90deg) rotate(0deg);
+  }
+  to {
+    transform: rotate(-90deg) rotate(360deg);
+  }
+}
+
+.quiz-timer-rotating .quiz-timer-svg {
+  animation: timer-rotate linear forwards;
+}
+
+/* ================= PULSE ================= */
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
