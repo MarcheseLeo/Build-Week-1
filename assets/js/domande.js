@@ -130,7 +130,6 @@ function endQuiz() {
     mainCont.style.flexDirection="column"
     mainCont.style.alignItems="center"
     mainCont.style.justifyContent="spece-evenly"
-    mainCont.style.marginTop="10%"
 
 
     //faccio apparire il paragraph di fine quiz
