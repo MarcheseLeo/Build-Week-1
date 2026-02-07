@@ -8,6 +8,10 @@ let score = 0
 let currentQuestion = {}
 const questionsLength = questions.length
 const counterContainer = document.getElementById('counterQuestions')
+///
+let resultAnswersArr=[]
+let resultAnswersQuest={}
+///
 
 function renderQuestion() {
     //Verifica della domanda corrente
@@ -76,6 +80,19 @@ function renderQuestion() {
             if (radio.value === currentQuestion["correct_answer"]) {
                 score++;
             }
+
+            ///creo array per riepilogo finale risposte
+            
+            resultAnswersQuest={
+                quest: currentQuestion["question"],
+                givenAns: radio.value,
+                correctAns:currentQuestion["correct_answer"],
+            }
+
+            resultAnswersArr.push(resultAnswersQuest)
+
+            ///
+
             console.log(`Risposta data: ${radio.value}`)
             console.log(`Risposta corretta: ${currentQuestion["correct_answer"]}`)
             console.log(`Score: ${score}`)
@@ -114,6 +131,7 @@ let endQuizBtn=document.createElement("button")
 
 let resultPointsPar=document.createElement("p")
 let resultFeedBCont=document.createElement("div")
+let ansReviewBtn=document.createElement("button")
 
 //funzione di fine quiz
 
@@ -140,16 +158,11 @@ function endQuiz() {
     mainCont.appendChild(endQuizPar)
 
     //appendo un Button già attivo che attiva la funzione di calcolo punteggio
-
-    //endQuizBtnLink=document.createElement("a")
-    //endQuizBtnLink.href="result.html"
     
     endQuizBtn.id="endButton"
     endQuizBtn.innerHTML="SHOW RESULT"
     endQuizBtn.addEventListener("click", ()=>{showResult(score,questionsLength)})
     mainCont.appendChild(endQuizBtn)
-
-    //endQuizBtnLink.appendChild(endQuizBtn)  
 
 }
 
@@ -164,9 +177,6 @@ function showResult(pointsGained,totPoints){
 
     //mostro il paragraph del risultato
     
-    
-    
-
     resultPointsPar.innerHTML="Hai totalizzato un <span>punteggio</span> di <span>"+ pointsGained+"</span>/"+totPoints
     resultPointsPar.id="resultPar"
 
@@ -189,6 +199,80 @@ function showResult(pointsGained,totPoints){
     }
 
     mainCont.appendChild(resultFeedBCont)
+
+
+    //aggiungo il button che rimanda a AnswersReview()
+
+    ansReviewBtn.innerHTML="Answers Review"
+    ansReviewBtn.addEventListener("click", AnswersReview)
+
+    mainCont.appendChild(ansReviewBtn)
+
+}
+
+
+///funzione per riepilogare le risposte
+
+function AnswersReview(){
+
+    //svuoto il main
+
+    mainCont.innerHTML=""
+
+    //
+    console.log(resultAnswersArr)
+    //
+
+    let i=1
+
+    for(qst of resultAnswersArr){
+
+        //creo il div
+
+        let repAnsCont=document.createElement("div")
+        repAnsCont.classList.add("revAnsCont")
+        mainCont.appendChild(repAnsCont)
+
+        //inserisco la domanda
+
+        let QstNumPar=document.createElement("p")
+        QstNumPar.innerHTML="Domanda "+i+":"
+        repAnsCont.appendChild(QstNumPar)
+
+        let QstPar=document.createElement("p")
+        QstPar.innerHTML=qst["quest"]
+        repAnsCont.appendChild(QstPar)
+
+        //controllo la risposta e do feedback
+
+        if(qst["givenAns"]===qst["correctAns"]){
+
+            let CorrAnsPar=document.createElement("p")
+            CorrAnsPar.innerHTML="RISPOSTA ESATTA"
+            repAnsCont.appendChild(CorrAnsPar)
+
+            let GivenAnsPar=document.createElement("p")
+            GivenAnsPar.innerHTML="Risposta data: "+qst["givenAns"]
+            repAnsCont.appendChild(GivenAnsPar)
+
+        }else{
+
+            let WrongAnsPar=document.createElement("p")
+            WrongAnsPar.innerHTML="RISPOSTA ERRATA"
+            repAnsCont.appendChild(WrongAnsPar)
+
+            let GivenAnsPar=document.createElement("p")
+            GivenAnsPar.innerHTML="Risposta data: "+qst["givenAns"]
+            repAnsCont.appendChild(GivenAnsPar)
+
+            let CorrAnsPar=document.createElement("p")
+            CorrAnsPar.innerHTML="Risposta corretta: "+qst["correctAns"]
+            repAnsCont.appendChild(CorrAnsPar)
+        }
+
+        i++
+    }
+
 }
 
 ////////////////////////////////////
