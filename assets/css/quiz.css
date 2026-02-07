@@ -139,7 +139,7 @@ h2 {
   color: #d20094;
 }
 
-/*css per End Quiz - aggancio a -page */
+/*css per End Quiz e Result */
 
 #endQuizparagraph {
   margin: revert;
@@ -155,11 +155,13 @@ h2 {
 #endButton {
   text-align: center;
   height: 100%;
-  font-size: 1.3em;
+  font-size: 1.5em;
   color: black;
   font-weight: 700;
   padding-left: 50px;
   padding-right: 50px;
+  padding-bottom: 20px;
+  padding-top: 20px;
   background-color: rgba(202, 202, 202, 0.315);
   box-shadow: 0px 0px 30px transparent;
   border: #00ffff;
@@ -174,9 +176,67 @@ h2 {
   font-weight: 700;
   padding-left: 50px;
   padding-right: 50px;
+  padding-bottom: 20px;
+  padding-top: 20px;
   background-color: #00ffff;
   box-shadow: 0px 0px 30px transparent;
   border: #00ffff;
 }
 
-/*----------------------------------*/
+#resultPar {
+    margin: revert;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    color: white;
+}
+
+#resultPar span {
+    color: #D20094;
+    font-size: 2em;
+    font-weight: 700;
+    display: inline-block;
+    animation:pulse 1s 3;
+
+    @keyframes pulse {
+      0%{transform:scale(1)}
+      50%{transform:scale(2)}
+      100%{transform:scale(1)}
+    }
+}
+
+#feedbackCont{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#feedbackCont h1 {
+    margin: revert;
+    font-family: "Outfit", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 60px;
+    color: white;
+    animation:pulse 1s 3;
+
+    @keyframes pulse {
+      0%{transform:scale(1)}
+      50%{transform:scale(2)}
+      100%{transform:scale(1)}
+    }
+
+}
+
+#feedbackCont p{
+    margin: revert;
+    font-family: "Inter", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 20px;
+    color: #D20094;
+}
