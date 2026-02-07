@@ -67,7 +67,7 @@ main {
 h2 {
   margin-top: 1em;
   text-align: center;
-  font-size: 4em;
+  font-size: 2em;
   width: 70%;
 }
 
@@ -94,10 +94,13 @@ h2 {
   opacity: 0;
 }
 
+/*BUTTON DELLE RISPOSTE*/
+
 .styleButton {
+  font-size: 0.7em;
   position: relative;
   font-family: "Inter";
-  padding: 2em 7em;
+  padding: 1em 5em;
   text-align: center;
   width: 20%;
   background: rgba(255, 255, 255, 0.1);
@@ -128,7 +131,7 @@ h2 {
   position: absolute;
   bottom: 3em;
   letter-spacing: 0.3em;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: 500;
 }
 
@@ -149,7 +152,7 @@ h2 {
   text-align: center;
 }
 
-#endButton{
+#endButton {
   text-align: center;
   height: 100%;
   font-size: 1.5em;
@@ -162,10 +165,10 @@ h2 {
   background-color: rgba(202, 202, 202, 0.315);
   box-shadow: 0px 0px 30px transparent;
   border: #00ffff;
-  transition: all 1s ease
+  transition: all 1s ease;
 }
 
-#endButton:hover{
+#endButton:hover {
   text-align: center;
   height: 100%;
   font-size: 1.3em;
@@ -180,6 +183,7 @@ h2 {
   border: #00ffff;
 }
 
+<<<<<<< HEAD
 #resultPar {
     margin: revert;
     font-family: "Inter", sans-serif;
@@ -239,3 +243,6 @@ h2 {
 }
 
 /*----------------------------------*/
+=======
+/*----------------------------------*/
+>>>>>>> d2f0ac26b43dcbd18e41281fff98a922aa2bb007
