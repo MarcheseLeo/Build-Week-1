@@ -7,8 +7,7 @@ let questionCounter = 0
 let score = 0
 let currentQuestion = {}
 const questionsLength = questions.length
-let counterText = document.querySelector('.count')
-
+const counterContainer = document.getElementById('counterQuestions')
 
 function renderQuestion() {
     //Verifica della domanda corrente
@@ -17,8 +16,9 @@ function renderQuestion() {
         return;
     }
     //Aggiotnamento indicatore Domanda corrente
-    counterText.textContent = `Question ${questionCounter + 1}/${questionsLength}`
-
+    counterContainer.innerHTML = ""
+    counterContainer.innerHTML = `<p class="count">QUESTION <span class="increasingNumber">${questionCounter+1}</span> / <span class="allQuestions">${questionsLength}</span></p>`
+    
     //Randomizzazione della domanda corrente
     currentQuestion = getRandomQuestion()
 
@@ -34,7 +34,7 @@ function renderQuestion() {
     let randomOptions = randomizeAnswers(options)
 
     boxContainer.innerHtml = ""
-
+    
     //Creazione container testo domanda
     const titleContainer = document.createElement('div')
     titleContainer.classList.add("titleContainer")
@@ -103,16 +103,26 @@ function nextQuestion() {
     renderQuestion();
 }
 
-///MODIFICA PER COLLEGARE A PAGINA FINALE
+///modifica per fine quiz e calcolo del rislutato
+
+//dichiaro le variabili per gli oggetti del DOM
+
+let countQ=document.querySelector("#counterQuestions")
+let mainCont=document.querySelector("main")
+let endQuizPar=document.createElement("p")
+let endQuizBtn=document.createElement("button")
+
+let resultPointsPar=document.createElement("p")
+let resultFeedBCont=document.createElement("div")
+
+//funzione di fine quiz
 
 function endQuiz() {
-    console.log(score)
 
     //Elimino il contatore delle domande
+    
+    mainCont.innerHTML=""
 
-    let countQ=document.querySelector("#counterQuestions")
-    let mainCont=document.querySelector("main")
-    mainCont.removeChild(countQ)
 
     //sistemo il main
 
@@ -121,33 +131,67 @@ function endQuiz() {
     mainCont.style.alignItems="center"
     mainCont.style.justifyContent="spece-evenly"
 
-    //faccio apparire il paragraph di fine quiz
 
-    endQuizPar=document.createElement("p")
+    //faccio apparire il paragraph di fine quiz
 
     endQuizPar.innerHTML="Il quiz è terminato"
     endQuizPar.id="endQuizparagraph"
 
     mainCont.appendChild(endQuizPar)
 
-    //appendo un Button già attivo che rimanda alla result-page
+    //appendo un Button già attivo che attiva la funzione di calcolo punteggio
 
-    endQuizBtnLink=document.createElement("a")
-    endQuizBtnLink.href="result.html"
+    //endQuizBtnLink=document.createElement("a")
+    //endQuizBtnLink.href="result.html"
     
-    endQuizBtn=document.createElement("button")
     endQuizBtn.id="endButton"
     endQuizBtn.innerHTML="SHOW RESULT"
-    endQuizBtn.addEventListener("onclick", ()=>{showResult(score,questionsLength)})
+    endQuizBtn.addEventListener("click", ()=>{showResult(score,questionsLength)})
+    mainCont.appendChild(endQuizBtn)
 
-    mainCont.appendChild(endQuizBtnLink)
-    endQuizBtnLink.appendChild(endQuizBtn)
-    
-    
+    //endQuizBtnLink.appendChild(endQuizBtn)  
 
 }
 
+/*funzione di calcolo punteggio e restituzione giudizio*//////
 
+function showResult(pointsGained,totPoints){
+
+    //svuoto il main
+
+    mainCont.innerHTML=""    
+
+
+    //mostro il paragraph del risultato
+    
+    
+    
+
+    resultPointsPar.innerHTML="Hai totalizzato un <span>punteggio</span> di <span>"+ pointsGained+"</span>/"+totPoints
+    resultPointsPar.id="resultPar"
+
+    mainCont.appendChild(resultPointsPar)
+
+
+    //calcolo la percentuale di risposte esatte//
+
+    let percentCorrect=(pointsGained*100)/totPoints
+
+
+    //confronto la percentuale con il 60%, e restituisco un feedback dinamico//
+
+    resultFeedBCont.id="feedbackCont"
+
+    if(percentCorrect>=60){
+        resultFeedBCont.innerHTML="<h1>Congratulazioni</h1><p>Hai superato l'esame</p>"
+    }else{
+        resultFeedBCont.innerHTML="<h1>Che peccato!</h1><p>Non hai superato l'esame</p>"
+    }
+
+    mainCont.appendChild(resultFeedBCont)
+}
+
+////////////////////////////////////
 
 
 
