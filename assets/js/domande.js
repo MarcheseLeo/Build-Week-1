@@ -7,8 +7,7 @@ let questionCounter = 0
 let score = 0
 let currentQuestion = {}
 const questionsLength = questions.length
-let counterText = document.querySelector('.count')
-
+const counterContainer = document.getElementById('counterQuestions')
 
 function renderQuestion() {
     //Verifica della domanda corrente
@@ -17,8 +16,9 @@ function renderQuestion() {
         return;
     }
     //Aggiotnamento indicatore Domanda corrente
-    counterText.textContent = `Question ${questionCounter + 1}/${questionsLength}`
-
+    counterContainer.innerHTML = ""
+    counterContainer.innerHTML = `<p class="count">QUESTION <span class="increasingNumber">${questionCounter+1}</span> / <span class="allQuestions">${questionsLength}</span></p>`
+    
     //Randomizzazione della domanda corrente
     currentQuestion = getRandomQuestion()
 
@@ -34,7 +34,7 @@ function renderQuestion() {
     let randomOptions = randomizeAnswers(options)
 
     boxContainer.innerHtml = ""
-
+    
     //Creazione container testo domanda
     const titleContainer = document.createElement('div')
     titleContainer.classList.add("titleContainer")
