@@ -145,7 +145,7 @@ h2 {
   margin: revert;
   font-family: "Outfit", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 700;
+  font-weight: 400;
   font-style: normal;
   font-size: 60px;
   color: white;
@@ -155,7 +155,7 @@ h2 {
 #endButton {
   text-align: center;
   height: 100%;
-  font-size: 1.5em;
+  font-size: 1.3em;
   color: black;
   font-weight: 700;
   padding-left: 50px;
@@ -165,7 +165,7 @@ h2 {
   background-color: rgba(202, 202, 202, 0.315);
   box-shadow: 0px 0px 30px transparent;
   border: #00ffff;
-  transition: all 1s ease;
+  
 }
 
 #endButton:hover {
@@ -181,6 +181,7 @@ h2 {
   background-color: #00ffff;
   box-shadow: 0px 0px 30px transparent;
   border: #00ffff;
+  transition: all 1s ease;
 }
 
 #resultPar {
@@ -198,7 +199,7 @@ h2 {
     font-size: 2em;
     font-weight: 700;
     display: inline-block;
-    animation:pulse 1s 3;
+    animation:pulse 0.5s 3;
 
     @keyframes pulse {
       0%{transform:scale(1)}
@@ -221,7 +222,7 @@ h2 {
     font-style: normal;
     font-size: 60px;
     color: white;
-    animation:pulse 1s 3;
+    animation:pulse 0.5s 3;
 
     @keyframes pulse {
       0%{transform:scale(1)}
@@ -239,4 +240,164 @@ h2 {
     font-style: normal;
     font-size: 20px;
     color: #D20094;
+}
+
+#ansRevButton{
+  text-align: center;
+  height: 100%;
+  font-size: 1.3em;
+  color: black;
+  font-weight: 700;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-top: 30px;
+  background-color: rgba(202, 202, 202, 0.315);
+  box-shadow: 0px 0px 30px transparent;
+  border: #00ffff;
+}
+
+#ansRevButton:hover{
+  text-align: center;
+  height: 100%;
+  font-size: 1.3em;
+  color: black;
+  font-weight: 700;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-top: 30px;
+  background-color: #00ffff;
+  box-shadow: 0px 0px 30px transparent;
+  border: #00ffff;
+  transition: all 1s ease;
+}
+
+
+/*css per Answers Review */
+
+.revAnsCont{
+  border: 1px solid white;
+  height: 400px;
+  width: 350px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+  
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.241);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  animation:pulse 0.5s 3;
+
+    @keyframes pulse {
+      0%{transform:scale(1)}
+      50%{transform:scale(2)}
+      100%{transform:scale(1)}
+    }
+}
+
+.repQuestNumCont{
+  width: 96%;
+  height: 21%;
+  padding: 2%;
+}
+
+.QstNumberPar{
+  margin: revert;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  color: gray;
+}
+
+.repQuestCont{
+  width: 96%;
+  height: 21%;
+  padding: 2%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.QstParagraph{
+  margin: revert;
+  font-family: "Outfit", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+  font-size: 1.2em;
+  color: white;
+  text-align: center;
+}
+
+.repFBtCont{
+  width: 96%;
+  height: 46%;
+  padding: 2%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.CorrectAnsPar{
+  margin: revert;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+
+  color: #39ff14;
+}
+
+.WrAnsPar{
+  margin: revert;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  
+  color: #ff3131;
+}
+
+.GivenAnswerPar{
+  margin: revert;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  
+  color: gray;
+}
+
+.GivenAnswerPar span{
+  margin: revert;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  
+  color: white;
+}
+
+.RgtAnsPar{
+  margin: revert;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  
+  color: gray;
+}
+
+.RgtAnsPar span{
+  margin: revert;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+  
+  color: #d20094;
 }
