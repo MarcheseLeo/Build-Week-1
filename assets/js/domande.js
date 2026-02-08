@@ -204,6 +204,7 @@ function showResult(pointsGained,totPoints){
     //aggiungo il button che rimanda a AnswersReview()
 
     ansReviewBtn.innerHTML="Answers Review"
+    ansReviewBtn.id="ansRevButton"
     ansReviewBtn.addEventListener("click", AnswersReview)
 
     mainCont.appendChild(ansReviewBtn)
@@ -215,9 +216,12 @@ function showResult(pointsGained,totPoints){
 
 function AnswersReview(){
 
-    //svuoto il main
+    //svuoto e sistemo il main
 
     mainCont.innerHTML=""
+    mainCont.style.flexDirection="row"
+    mainCont.style.flexWrap="wrap"
+    mainCont.style.paddingTop="50px"
 
     //
     console.log(resultAnswersArr)
@@ -235,39 +239,63 @@ function AnswersReview(){
 
         //inserisco la domanda
 
+        let repQstNumCont=document.createElement("div")
+        repQstNumCont.classList.add("repQuestNumCont")
+        repAnsCont.appendChild(repQstNumCont)
+
         let QstNumPar=document.createElement("p")
         QstNumPar.innerHTML="Domanda "+i+":"
-        repAnsCont.appendChild(QstNumPar)
+        QstNumPar.classList.add("QstNumberPar")
+        repQstNumCont.appendChild(QstNumPar)
+
+        let repQstCont=document.createElement("div")
+        repQstCont.classList.add("repQuestCont")
+        repAnsCont.appendChild(repQstCont)
 
         let QstPar=document.createElement("p")
         QstPar.innerHTML=qst["quest"]
-        repAnsCont.appendChild(QstPar)
+        QstPar.classList.add("QstParagraph")
+        repQstCont.appendChild(QstPar)
 
         //controllo la risposta e do feedback
+
+        let repFeedbackCont=document.createElement("div")
+        repFeedbackCont.classList.add("repFBtCont")
+        repAnsCont.appendChild(repFeedbackCont)
 
         if(qst["givenAns"]===qst["correctAns"]){
 
             let CorrAnsPar=document.createElement("p")
             CorrAnsPar.innerHTML="RISPOSTA ESATTA"
-            repAnsCont.appendChild(CorrAnsPar)
+            CorrAnsPar.classList.add("CorrectAnsPar")
+            repFeedbackCont.appendChild(CorrAnsPar)
 
             let GivenAnsPar=document.createElement("p")
-            GivenAnsPar.innerHTML="Risposta data: "+qst["givenAns"]
-            repAnsCont.appendChild(GivenAnsPar)
+            GivenAnsPar.innerHTML=" "
+            GivenAnsPar.classList.add("GivenAnswerPar")
+            repFeedbackCont.appendChild(GivenAnsPar)
+
+            let RightAnsPar=document.createElement("p")
+            RightAnsPar.innerHTML="Risposta corretta: <span>"+qst["correctAns"]+"</span>"
+            RightAnsPar.classList.add("RgtAnsPar")
+            repFeedbackCont.appendChild(RightAnsPar)
 
         }else{
 
             let WrongAnsPar=document.createElement("p")
             WrongAnsPar.innerHTML="RISPOSTA ERRATA"
-            repAnsCont.appendChild(WrongAnsPar)
+            WrongAnsPar.classList.add("WrAnsPar")
+            repFeedbackCont.appendChild(WrongAnsPar)
 
             let GivenAnsPar=document.createElement("p")
-            GivenAnsPar.innerHTML="Risposta data: "+qst["givenAns"]
-            repAnsCont.appendChild(GivenAnsPar)
+            GivenAnsPar.innerHTML="Risposta data: <span>"+qst["givenAns"]+"</span>"
+            GivenAnsPar.classList.add("GivenAnswerPar")
+            repFeedbackCont.appendChild(GivenAnsPar)
 
-            let CorrAnsPar=document.createElement("p")
-            CorrAnsPar.innerHTML="Risposta corretta: "+qst["correctAns"]
-            repAnsCont.appendChild(CorrAnsPar)
+            let RightAnsPar=document.createElement("p")
+            RightAnsPar.innerHTML="Risposta corretta: <span>"+qst["correctAns"]+"</span>"
+            RightAnsPar.classList.add("RgtAnsPar")
+            repFeedbackCont.appendChild(RightAnsPar)
         }
 
         i++
@@ -299,5 +327,3 @@ function randomizeAnswers(options) {
 window.addEventListener('load', () => {
     renderQuestion()
 })
-
-//prova
