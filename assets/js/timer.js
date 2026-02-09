@@ -46,9 +46,8 @@ function startQuestionTimer(difficulty, onTimeUp) {
 
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
-      if (typeof onTimeUp === "function") {
-        onTimeUp(); // vai alla prossima domanda
-      }
+     boxContainer.innerHTML = ""
+      nextQuestion()
     }
   }, 1000);
 }
@@ -57,17 +56,17 @@ function startQuestionTimer(difficulty, onTimeUp) {
 // UPDATE TIMER UI
 // --------------------
 function updateTimerUI() {
-  const timerEl = document.getElementById("question-timer");
+  const timerEl = document.getElementById("quiz-timer-number");
   timerEl.textContent = `Time left: ${timeLeft}s`;
 
-  timerEl.classList.remove("warning", "critical");
+   circle.classList.remove("warning", "critical");
 
   const percentLeft = timeLeft / totalTimeForQuestion;
 
   if (percentLeft <= 0.2) {
-    timerEl.classList.add("critical");
+    circle.classList.add("critical");
   } else if (percentLeft <= 0.4) {
-    timerEl.classList.add("warning");
+    circle.classList.add("warning");
   }
 }
 
