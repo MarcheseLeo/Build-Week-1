@@ -1,5 +1,5 @@
 //----------- BRANCH JS/DOMANDE ---------------
-    
+
 /* TODO: Domande + random risposta esatta + counter domande*/
 
 const boxContainer = document.getElementById('boxQuestions')
@@ -9,11 +9,14 @@ let currentQuestion = {}
 const questionsLength = questions.length
 const counterContainer = document.getElementById('counterQuestions')
 ///
-let resultAnswersArr=[]
-let resultAnswersQuest={}
+let resultAnswersArr = []
+let resultAnswersQuest = {}
 ///
 
 function renderQuestion() {
+    //Cancello eventuali timer precedenti
+    clearInterval(timerInterval)
+
     //Verifica della domanda corrente
     if (questionCounter >= questionsLength) {
         endQuiz()
@@ -21,12 +24,14 @@ function renderQuestion() {
     }
     //Aggiotnamento indicatore Domanda corrente
     counterContainer.innerHTML = ""
-    counterContainer.innerHTML = `<p class="count">QUESTION <span class="increasingNumber">${questionCounter+1}</span> / <span class="allQuestions">${questionsLength}</span></p>`
-    
+    counterContainer.innerHTML = `<p class="count">QUESTION <span class="increasingNumber">${questionCounter + 1}</span> / <span class="allQuestions">${questionsLength}</span></p>`
+
     //Randomizzazione della domanda corrente
     currentQuestion = getRandomQuestion()
 
-    
+    //Faccio partire il timer
+    startQuestionTimer(currentQuestion["difficulty"])
+
     //Creazione dell/array per le risposte
     let options = []
     options.push(currentQuestion["correct_answer"])
@@ -38,7 +43,7 @@ function renderQuestion() {
     let randomOptions = randomizeAnswers(options)
 
     boxContainer.innerHtml = ""
-    
+
     //Creazione container testo domanda
     const titleContainer = document.createElement('div')
     titleContainer.classList.add("titleContainer")
@@ -77,16 +82,19 @@ function renderQuestion() {
         label.classList.add('styleButton')
 
         radio.addEventListener('change', () => {
+            //Se una delle risposte e' cliccata, azzero il timer
+            clearInterval(timerInterval)
+            
             if (radio.value === currentQuestion["correct_answer"]) {
                 score++;
             }
 
             ///creo array per riepilogo finale risposte
-            
-            resultAnswersQuest={
+
+            resultAnswersQuest = {
                 quest: currentQuestion["question"],
                 givenAns: radio.value,
-                correctAns:currentQuestion["correct_answer"],
+                correctAns: currentQuestion["correct_answer"],
             }
 
             resultAnswersArr.push(resultAnswersQuest)
@@ -99,7 +107,7 @@ function renderQuestion() {
             boxContainer.innerHTML = ""
             setTimeout(nextQuestion, 100);
         })
-      
+
         form.appendChild(radio)
         form.appendChild(label)
 
@@ -124,78 +132,78 @@ function nextQuestion() {
 
 //dichiaro le variabili per gli oggetti del DOM
 
-let countQ=document.querySelector("#counterQuestions")
-let mainCont=document.querySelector("main")
-let endQuizPar=document.createElement("p")
-let endQuizBtn=document.createElement("button")
+let countQ = document.querySelector("#counterQuestions")
+let mainCont = document.querySelector("main")
+let endQuizPar = document.createElement("p")
+let endQuizBtn = document.createElement("button")
 
-let resultPointsPar=document.createElement("p")
-let resultFeedBCont=document.createElement("div")
-let ansReviewBtn=document.createElement("button")
+let resultPointsPar = document.createElement("p")
+let resultFeedBCont = document.createElement("div")
+let ansReviewBtn = document.createElement("button")
 
 //funzione di fine quiz
 
 function endQuiz() {
 
     //Elimino il contatore delle domande
-    
-    mainCont.innerHTML=""
+
+    mainCont.innerHTML = ""
 
 
     //sistemo il main
 
-    mainCont.style.display="flex"
-    mainCont.style.flexDirection="column"
-    mainCont.style.alignItems="center"
-    mainCont.style.justifyContent="spece-evenly"
+    mainCont.style.display = "flex"
+    mainCont.style.flexDirection = "column"
+    mainCont.style.alignItems = "center"
+    mainCont.style.justifyContent = "spece-evenly"
 
 
     //faccio apparire il paragraph di fine quiz
 
-    endQuizPar.innerHTML="Il quiz è terminato"
-    endQuizPar.id="endQuizparagraph"
+    endQuizPar.innerHTML = "Il quiz è terminato"
+    endQuizPar.id = "endQuizparagraph"
 
     mainCont.appendChild(endQuizPar)
 
     //appendo un Button già attivo che attiva la funzione di calcolo punteggio
-    
-    endQuizBtn.id="endButton"
-    endQuizBtn.innerHTML="SHOW RESULT"
-    endQuizBtn.addEventListener("click", ()=>{showResult(score,questionsLength)})
+
+    endQuizBtn.id = "endButton"
+    endQuizBtn.innerHTML = "SHOW RESULT"
+    endQuizBtn.addEventListener("click", () => { showResult(score, questionsLength) })
     mainCont.appendChild(endQuizBtn)
 
 }
 
 /*funzione di calcolo punteggio e restituzione giudizio*//////
 
-function showResult(pointsGained,totPoints){
+function showResult(pointsGained, totPoints) {
 
     //svuoto il main
 
-    mainCont.innerHTML=""    
+    mainCont.innerHTML = ""
 
 
     //mostro il paragraph del risultato
-    
-    resultPointsPar.innerHTML="Hai totalizzato un <span>punteggio</span> di <span>"+ pointsGained+"</span>/"+totPoints
-    resultPointsPar.id="resultPar"
+
+    resultPointsPar.innerHTML = "Hai totalizzato un <span>punteggio</span> di <span>" + pointsGained + "</span>/" + totPoints
+    resultPointsPar.id = "resultPar"
 
     mainCont.appendChild(resultPointsPar)
 
 
     //calcolo la percentuale di risposte esatte//
 
-    let percentCorrect=(pointsGained*100)/totPoints
+    let percentCorrect = (pointsGained * 100) / totPoints
 
 
     //confronto la percentuale con il 60%, e restituisco un feedback dinamico//
 
-    resultFeedBCont.id="feedbackCont"
+    resultFeedBCont.id = "feedbackCont"
 
-    if(percentCorrect>=60){
-        resultFeedBCont.innerHTML="<h1>Congratulazioni</h1><p>Hai superato l'esame</p>"
-    }else{
-        resultFeedBCont.innerHTML="<h1>Che peccato!</h1><p>Non hai superato l'esame</p>"
+    if (percentCorrect >= 60) {
+        resultFeedBCont.innerHTML = "<h1>Congratulazioni</h1><p>Hai superato l'esame</p>"
+    } else {
+        resultFeedBCont.innerHTML = "<h1>Che peccato!</h1><p>Non hai superato l'esame</p>"
     }
 
     mainCont.appendChild(resultFeedBCont)
@@ -203,8 +211,8 @@ function showResult(pointsGained,totPoints){
 
     //aggiungo il button che rimanda a AnswersReview()
 
-    ansReviewBtn.innerHTML="Answers Review"
-    ansReviewBtn.id="ansRevButton"
+    ansReviewBtn.innerHTML = "Answers Review"
+    ansReviewBtn.id = "ansRevButton"
     ansReviewBtn.addEventListener("click", AnswersReview)
 
     mainCont.appendChild(ansReviewBtn)
@@ -214,86 +222,86 @@ function showResult(pointsGained,totPoints){
 
 ///funzione per riepilogare le risposte
 
-function AnswersReview(){
+function AnswersReview() {
 
     //svuoto e sistemo il main
 
-    mainCont.innerHTML=""
-    mainCont.style.flexDirection="row"
-    mainCont.style.flexWrap="wrap"
-    mainCont.style.paddingTop="50px"
+    mainCont.innerHTML = ""
+    mainCont.style.flexDirection = "row"
+    mainCont.style.flexWrap = "wrap"
+    mainCont.style.paddingTop = "50px"
 
     //
     console.log(resultAnswersArr)
     //
 
-    let i=1
+    let i = 1
 
-    for(qst of resultAnswersArr){
+    for (qst of resultAnswersArr) {
 
         //creo il div
 
-        let repAnsCont=document.createElement("div")
+        let repAnsCont = document.createElement("div")
         repAnsCont.classList.add("revAnsCont")
         mainCont.appendChild(repAnsCont)
 
         //inserisco la domanda
 
-        let repQstNumCont=document.createElement("div")
+        let repQstNumCont = document.createElement("div")
         repQstNumCont.classList.add("repQuestNumCont")
         repAnsCont.appendChild(repQstNumCont)
 
-        let QstNumPar=document.createElement("p")
-        QstNumPar.innerHTML="Domanda "+i+":"
+        let QstNumPar = document.createElement("p")
+        QstNumPar.innerHTML = "Domanda " + i + ":"
         QstNumPar.classList.add("QstNumberPar")
         repQstNumCont.appendChild(QstNumPar)
 
-        let repQstCont=document.createElement("div")
+        let repQstCont = document.createElement("div")
         repQstCont.classList.add("repQuestCont")
         repAnsCont.appendChild(repQstCont)
 
-        let QstPar=document.createElement("p")
-        QstPar.innerHTML=qst["quest"]
+        let QstPar = document.createElement("p")
+        QstPar.innerHTML = qst["quest"]
         QstPar.classList.add("QstParagraph")
         repQstCont.appendChild(QstPar)
 
         //controllo la risposta e do feedback
 
-        let repFeedbackCont=document.createElement("div")
+        let repFeedbackCont = document.createElement("div")
         repFeedbackCont.classList.add("repFBtCont")
         repAnsCont.appendChild(repFeedbackCont)
 
-        if(qst["givenAns"]===qst["correctAns"]){
+        if (qst["givenAns"] === qst["correctAns"]) {
 
-            let CorrAnsPar=document.createElement("p")
-            CorrAnsPar.innerHTML="RISPOSTA ESATTA"
+            let CorrAnsPar = document.createElement("p")
+            CorrAnsPar.innerHTML = "RISPOSTA ESATTA"
             CorrAnsPar.classList.add("CorrectAnsPar")
             repFeedbackCont.appendChild(CorrAnsPar)
 
-            let GivenAnsPar=document.createElement("p")
-            GivenAnsPar.innerHTML=" "
+            let GivenAnsPar = document.createElement("p")
+            GivenAnsPar.innerHTML = " "
             GivenAnsPar.classList.add("GivenAnswerPar")
             repFeedbackCont.appendChild(GivenAnsPar)
 
-            let RightAnsPar=document.createElement("p")
-            RightAnsPar.innerHTML="Risposta corretta: <span>"+qst["correctAns"]+"</span>"
+            let RightAnsPar = document.createElement("p")
+            RightAnsPar.innerHTML = "Risposta corretta: <span>" + qst["correctAns"] + "</span>"
             RightAnsPar.classList.add("RgtAnsPar")
             repFeedbackCont.appendChild(RightAnsPar)
 
-        }else{
+        } else {
 
-            let WrongAnsPar=document.createElement("p")
-            WrongAnsPar.innerHTML="RISPOSTA ERRATA"
+            let WrongAnsPar = document.createElement("p")
+            WrongAnsPar.innerHTML = "RISPOSTA ERRATA"
             WrongAnsPar.classList.add("WrAnsPar")
             repFeedbackCont.appendChild(WrongAnsPar)
 
-            let GivenAnsPar=document.createElement("p")
-            GivenAnsPar.innerHTML="Risposta data: <span>"+qst["givenAns"]+"</span>"
+            let GivenAnsPar = document.createElement("p")
+            GivenAnsPar.innerHTML = "Risposta data: <span>" + qst["givenAns"] + "</span>"
             GivenAnsPar.classList.add("GivenAnswerPar")
             repFeedbackCont.appendChild(GivenAnsPar)
 
-            let RightAnsPar=document.createElement("p")
-            RightAnsPar.innerHTML="Risposta corretta: <span>"+qst["correctAns"]+"</span>"
+            let RightAnsPar = document.createElement("p")
+            RightAnsPar.innerHTML = "Risposta corretta: <span>" + qst["correctAns"] + "</span>"
             RightAnsPar.classList.add("RgtAnsPar")
             repFeedbackCont.appendChild(RightAnsPar)
         }
