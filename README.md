@@ -79,10 +79,6 @@ You can test the live version of this project directly via GitHub Pages. No inst
 
 🔗 **[Click here to view the Live Demo](https://MarcheseLeo.github.io/Build-Week-1)**
 
-1. Clone the repository.
-2. Open `index.html` in your preferred browser (or run your local server command).
-3. Navigate through the [Home/Dashboard] to explore the features.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
