@@ -31,7 +31,7 @@ function getTimeForQuestion(difficulty) {
 // --------------------
 // START TIMER (CALL THIS PER QUESTION)
 // --------------------
-function startQuestionTimer(difficulty, onTimeUp) {
+function startQuestionTimer(difficulty) {
   clearInterval(timerInterval);
 
   const seconds = getTimeForQuestion(difficulty);
@@ -46,7 +46,7 @@ function startQuestionTimer(difficulty, onTimeUp) {
 
     if (timeLeft <= 0) {
       clearInterval(timerInterval);
-     boxContainer.innerHTML = ""
+      boxContainer.innerHTML = ""
       nextQuestion()
     }
   }, 1000);
@@ -57,9 +57,10 @@ function startQuestionTimer(difficulty, onTimeUp) {
 // --------------------
 function updateTimerUI() {
   const timerEl = document.getElementById("quiz-timer-number");
-  timerEl.textContent = `Time left: ${timeLeft}s`;
+  const circle = document.getElementById('quiz-timer')
+  timerEl.textContent = `${timeLeft}`;
 
-   circle.classList.remove("warning", "critical");
+  circle.classList.remove("warning", "critical");
 
   const percentLeft = timeLeft / totalTimeForQuestion;
 
