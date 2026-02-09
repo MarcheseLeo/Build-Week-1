@@ -14,6 +14,9 @@ let resultAnswersQuest={}
 ///
 
 function renderQuestion() {
+    //Cancello eventuali timer precedenti
+    clearInterval(timerInterval)
+
     //Verifica della domanda corrente
     if (questionCounter >= questionsLength) {
         endQuiz()
@@ -21,12 +24,14 @@ function renderQuestion() {
     }
     //Aggiotnamento indicatore Domanda corrente
     counterContainer.innerHTML = ""
-    counterContainer.innerHTML = `<p class="count">QUESTION <span class="increasingNumber">${questionCounter+1}</span> / <span class="allQuestions">${questionsLength}</span></p>`
-    
+    counterContainer.innerHTML = <p class="count">QUESTION <span class="increasingNumber">${questionCounter + 1}</span> / <span class="allQuestions">${questionsLength}</span></p>
+
     //Randomizzazione della domanda corrente
     currentQuestion = getRandomQuestion()
 
-    
+    //Faccio partire il timer
+    startQuestionTimer(currentQuestion["difficulty"])
+
     //Creazione dell/array per le risposte
     let options = []
     options.push(currentQuestion["correct_answer"])
@@ -38,7 +43,7 @@ function renderQuestion() {
     let randomOptions = randomizeAnswers(options)
 
     boxContainer.innerHtml = ""
-    
+
     //Creazione container testo domanda
     const titleContainer = document.createElement('div')
     titleContainer.classList.add("titleContainer")
@@ -67,39 +72,43 @@ function renderQuestion() {
         const radio = document.createElement('input')
         radio.type = 'radio'
         radio.name = "answer"
-        radio.id = `radio${index}`
+        radio.id = radio${index}
         radio.value = option
 
         //Creazione della label
         const label = document.createElement('label')
-        label.htmlFor = `radio${index}`
+        label.htmlFor = radio${index}
         label.textContent = option
         label.classList.add('styleButton')
 
         radio.addEventListener('change', () => {
+
+            //Se una delle risposte e' cliccata, azzero il timer
+            clearInterval(timerInterval)
+
             if (radio.value === currentQuestion["correct_answer"]) {
                 score++;
             }
 
             ///creo array per riepilogo finale risposte
-            
-            resultAnswersQuest={
+
+            resultAnswersQuest = {
                 quest: currentQuestion["question"],
                 givenAns: radio.value,
-                correctAns:currentQuestion["correct_answer"],
+                correctAns: currentQuestion["correct_answer"],
             }
 
             resultAnswersArr.push(resultAnswersQuest)
 
             ///
 
-            console.log(`Risposta data: ${radio.value}`)
-            console.log(`Risposta corretta: ${currentQuestion["correct_answer"]}`)
-            console.log(`Score: ${score}`)
+            console.log(Risposta data: ${radio.value})
+            console.log(Risposta corretta: ${currentQuestion["correct_answer"]})
+            console.log(Score: ${score})
             boxContainer.innerHTML = ""
             setTimeout(nextQuestion, 100);
         })
-      
+
         form.appendChild(radio)
         form.appendChild(label)
 
